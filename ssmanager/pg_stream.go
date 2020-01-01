@@ -44,3 +44,16 @@ func WriteFile(fileurl,data string)error{
 	}
 	return nil
 }
+
+func WriteTxtFile(fileurl string, data string)error{
+	f, err := os.OpenFile(fileurl, os.O_WRONLY|os.O_TRUNC, 0600)
+    defer f.Close()
+    if err != nil {
+		fmt.Println(err.Error())
+		return err
+    } else {
+     _,err=f.Write([]byte(data))
+	 sysutil.CheckError(err)
+	}
+	return nil
+}
