@@ -40,6 +40,8 @@ func GetFilelist(fileurl string, sext string, bfilter bool)[]string {
 					}else{
 						dir_list = append(dir_list, fileurl)
 					}
+				}else{
+					dir_list = append(dir_list, fileurl)
 				}
 				return nil
         })
