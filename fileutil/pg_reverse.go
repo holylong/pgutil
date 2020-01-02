@@ -5,7 +5,8 @@ import (
     "os"
 	"fmt"
     "path"
-    "strings"
+	"strings"
+	"io/ioutil"
 	// "flag"
 )
 
@@ -27,6 +28,21 @@ func GetFileName(fileurl string)string{
 	return filenameOnly	
 }
 
+func ReverseFileList(fileurl string)[]string {
+	var dir_list []string
+	fs,_:= ioutil.ReadDir(fileurl)
+    for _,file:=range fs{
+        if file.IsDir(){
+			//fmt.Println(fileurl+"/" +file.Name())
+			dir_list = append(dir_list, fileurl+"/" + file.Name()+"/")
+            //getFileList(fileurl+file.Name()+"/")
+        }else{
+            fmt.Println(fileurl+file.Name())
+        }
+	}
+	return dir_list
+}
+
 func GetFilelist(fileurl string, sext string, bfilter bool)[]string {
 		var dir_list []string
 		//arrlist := make([]string,0)
@@ -41,7 +57,8 @@ func GetFilelist(fileurl string, sext string, bfilter bool)[]string {
 						dir_list = append(dir_list, fileurl)
 					}
 				}else{
-					dir_list = append(dir_list, fileurl)
+					return nil
+					//dir_list = append(dir_list, fileurl)
 				}
 				return nil
         })
