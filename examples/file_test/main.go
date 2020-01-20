@@ -25,7 +25,7 @@ func main(){
 		var lines []string
 		for i := 0; i < len(arrdir); i++ {
 			//fmt.Print(arrdir[i], "\n")
-			lines = append(lines, fileutil.MontainFile(arrdir[i], "wget -e 'https_proxy=http://127.0.0.1:1080'", "")...)
+			lines = append(lines, fileutil.MontainFile(arrdir[i], "wget -nc -t 2 -T 5 -e \"https_proxy=http://127.0.0.1:1080\"", "")...)
 		}
 
 		for i := 0; i < len(lines); i++ {
