@@ -25,14 +25,15 @@ func main(){
 		var lines []string
 		for i := 0; i < len(arrdir); i++ {
 			//fmt.Print(arrdir[i], "\n")
-			lines = append(lines, fileutil.MontainFile(arrdir[i], "wget -nc -t 2 -T 5 -e \"https_proxy=http://127.0.0.1:1080\"", "")...)
+			lines = append(lines, fileutil.MontainFile(arrdir[i], "wget -nc -t 1 -T 1 -e \"https_proxy=http://127.0.0.1:1080\"", "")...)
+			//lines = append(lines, fileutil.MontainFile(arrdir[i], "wget -nc -t 2 -T 5", "")...)
 		}
 
 		for i := 0; i < len(lines); i++ {
 			lines[i] = lines[i] + " -O " + strconv.Itoa(i) + ".jpg\n"
 		}
 
-		fileutil.WriteFile(lines, "abs", "bat", true)
+		fileutil.WriteFile(lines, "https_1s", "bat", true)
 	}else{
 		fmt.Println("please input a root dir!")
 	}
