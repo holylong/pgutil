@@ -43,7 +43,25 @@ func ReverseFileList(fileurl string)[]string {
 	return dir_list
 }
 
-func GetFilelist(fileurl string, sext string, bfilter bool)[]string {
+func GetFileNoDirList(fileurl string)[]string {
+	var dir_list []string
+	//arrlist := make([]string,0)
+	err := filepath.Walk(fileurl, func(fileurl string, f os.FileInfo, err error) error {
+			if ( f == nil ) {return err}
+			if f.IsDir() {
+				return nil
+			}else{
+				dir_list = append(dir_list, fileurl)
+			}
+			return nil
+	})
+	if err != nil {
+			fmt.Printf("filepath.Walk() returned %v\n", err)
+	}
+	return dir_list
+}
+
+func GetFileDirList(fileurl string, sext string, bfilter bool)[]string {
 		var dir_list []string
 		//arrlist := make([]string,0)
         err := filepath.Walk(fileurl, func(fileurl string, f os.FileInfo, err error) error {
